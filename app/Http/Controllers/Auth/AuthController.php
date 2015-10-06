@@ -56,10 +56,31 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        /*return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'role' => 'user',
+            'password' => bcrypt($data['password']),
+        ]);*/
+        $usuario = new User([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+            ]);
+            
+        $usuario->role = 'user';
+        $usuario->save();
+        
+        return '';
+    }
+    
+    public function loginPath()
+    {
+        redirectTo : '/auth/login';
+    }
+    
+    public  function redirectPath()
+    {
+        redirectTo : '/';
     }
 }
